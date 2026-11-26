@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>은혜의 홈스쿨 | 매일 자라는 다섯 갈래의 별</title>
+<meta name="description" content="인성·지성·체성·관계성·영성으로 아이들의 하루를 기록하고 계획하는 은혜의 홈스쿨">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --bg:#080F1B; --bg2:#0B1523; --panel:rgba(16,28,43,.78); --line:rgba(230,197,139,.18); --line2:rgba(189,200,212,.14);
+  --text:#F3F0E9; --sub:#BDC8D4; --mute:#8193A3; --gold:#E6C58B; --gold2:#E9CD99; --goldDeep:#B8955A;
+  --serif:"Noto Serif KR",Georgia,serif; --sans:"Pretendard Variable",Pretendard,"Apple SD Gothic Neo",sans-serif;
+  --r:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.7;min-height:100vh;overflow-x:hidden}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+
+/* 별이 뿌려진 밤하늘 배경 */
+#sky{position:fixed;inset:0;z-index:-1;pointer-events:none;background:
+  radial-gradient(ellipse 60% 50% at 75% 20%,rgba(60,80,120,.28),transparent 70%),
+  radial-gradient(ellipse 50% 40% at 15% 80%,rgba(40,60,90,.22),transparent 70%),var(--bg)}
+#sky canvas{width:100%;height:100%;display:block}
+
+/* 상단 바 */
+header{position:sticky;top:0;z-index:30;background:rgba(8,15,27,.82);backdrop-filter:blur(10px);border-bottom:1px solid var(--line2)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo b{font-family:var(--serif);font-size:26px;color:var(--gold);font-weight:600;line-height:1}
+.logo span{display:block;font-weight:700;letter-spacing:.06em;font-size:14px}
+.logo small{display:block;font-size:11px;color:var(--mute);letter-spacing:0}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{font-size:14px;color:var(--sub);text-decoration:none;padding:8px 12px;border-radius:999px;transition:.18s}
+nav a:hover{color:var(--text)}
+nav a.on{color:var(--bg);background:var(--gold2);font-weight:700}
+.kid-switch{display:flex;gap:6px;align-items:center}
+.kid-chip{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 12px;font-size:13px;color:var(--sub);transition:.18s}
+.kid-chip.on{border-color:var(--gold);color:var(--gold);background:rgba(230,197,139,.08)}
+
+/* 히어로 */
+.hero{padding:88px 0 64px;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:12px;color:var(--gold);font-size:13px;font-weight:600;letter-spacing:.08em}
+.eyebrow::before{content:"";width:40px;height:1px;background:var(--gold)}
+h1.title{font-family:var(--serif);font-weight:600;font-size:clamp(44px,7.2vw,84px);line-height:1.12;letter-spacing:-.075em;margin:22px 0 22px}
+.lead{max-width:560px;color:var(--sub);font-size:16px}
+.hanja{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:56px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.hanja div{padding:22px 10px 18px;text-align:center;border-right:1px solid var(--line2)}
+.hanja div:last-child{border-right:0}
+.hanja b{display:block;font-family:var(--serif);font-size:clamp(34px,5vw,52px);color:var(--gold);font-weight:600;line-height:1.1}
+.hanja span{display:block;font-weight:700;font-size:14px;margin-top:8px}
+.hanja small{display:block;color:var(--mute);font-size:12px;line-height:1.5;margin-top:2px}
+
+/* 섹션 공통 */
+section.page{display:none;padding:56px 0 96px}
+section.page.on{display:block}
+h2.sec{font-family:var(--serif);font-weight:600;font-size:clamp(30px,4.2vw,46px);letter-spacing:-.055em;line-height:1.25;margin:14px 0 10px}
+.sec-lead{color:var(--sub);max-width:640px;margin-bottom:32px}
+.panel{background:var(--panel);border:1px solid var(--line2);border-radius:var(--r);padding:22px}
+.grid{display:grid;gap:16px}
+.btn{white-space:nowrap;flex-shrink:0;border:1px solid var(--line);background:transparent;border-radius:10px;padding:10px 16px;font-size:14px;font-weight:600;transition:.18s}
+.btn:hover{border-color:var(--gold);color:var(--gold)}
+.btn.gold{background:var(--gold2);color:#1a1408;border-color:var(--gold2)}
+.btn.gold:hover{background:var(--gold);color:#1a1408}
+.btn.sm{padding:6px 10px;font-size:12px;border-radius:8px}
+input[type=text],input[type=date],input[type=time],input[type=number],select,textarea{background:rgba(5,13,25,.7);border:1px solid var(--line2);border-radius:10px;padding:10px 12px;width:100%;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+label.f{display:block;font-size:12px;color:var(--mute);margin-bottom:6px;font-weight:600}
+.tag{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--gold);border:1px solid var(--line);border-radius:999px;padding:2px 10px}
+.tag b{font-family:var(--serif);font-weight:600}
+.muted{color:var(--mute)}
+.fade{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.fade.in{opacity:1;transform:none}
+.empty{color:var(--mute);text-align:center;padding:36px 12px;border:1px dashed var(--line2);border-radius:var(--r)}
+
+/* 오늘의 할 일 */
+.today-head{display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between;margin-bottom:24px}
+.date-nav{display:flex;align-items:center;gap:8px}
+.date-nav strong{font-family:var(--serif);font-size:22px;font-weight:600;min-width:210px;text-align:center}
+.ring{display:flex;align-items:center;gap:16px}
+.ring svg{width:84px;height:84px}
+.ring .n{font-family:var(--serif);font-size:30px;color:var(--gold);line-height:1}
+.verse{margin-bottom:24px;display:flex;gap:16px;align-items:flex-start}
+.verse .q{font-family:var(--serif);font-size:44px;color:var(--gold);line-height:.8}
+.verse p{font-family:var(--serif);font-size:18px;line-height:1.7}
+.verse .ref{font-family:var(--sans);font-size:13px;color:var(--mute)}
+.group-title{display:flex;align-items:center;gap:12px;margin:26px 0 12px;font-weight:700;color:var(--sub);font-size:14px}
+.group-title::after{content:"";flex:1;height:1px;background:var(--line2)}
+.tasks{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.task{position:relative;background:var(--panel);border:1px solid var(--line2);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:10px;min-height:178px;transition:border-color .2s,transform .2s}
+.task:hover{transform:translateY(-2px)}
+.task.done{border-color:rgba(230,197,139,.55);box-shadow:0 0 0 1px rgba(230,197,139,.15),0 10px 30px -18px rgba(230,197,139,.6)}
+.task .top{display:flex;justify-content:space-between;align-items:center}
+.task h4{font-size:17px;font-weight:700}
+.task .hint{font-size:12px;color:var(--mute);line-height:1.5}
+.task .thumb{width:100%;height:96px;border-radius:10px;object-fit:cover;cursor:zoom-in;border:1px solid var(--line)}
+.task .drop{flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;border:1px dashed var(--line);border-radius:10px;color:var(--sub);font-size:13px;padding:12px;transition:.18s;text-align:center}
+.task .drop:hover{border-color:var(--gold);color:var(--gold);background:rgba(230,197,139,.04)}
+.task .row{display:flex;gap:6px;flex-wrap:wrap}
+.check{position:absolute;top:14px;right:14px;width:24px;height:24px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:13px}
+.task.done .check{background:var(--gold2);color:#1a1408;border-color:var(--gold2)}
+.parent-ok{font-size:12px;color:var(--gold)}
+.task input[type=file]{display:none}
+
+/* 일정 계획 */
+.week{grid-template-columns:repeat(7,1fr)}
+.day{background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:12px;min-height:200px;display:flex;flex-direction:column;gap:8px}
+.day.today{border-color:var(--gold)}
+.day h5{display:flex;justify-content:space-between;font-size:13px;color:var(--sub);font-weight:600}
+.day h5 b{font-family:var(--serif);font-size:20px;color:var(--text)}
+.bar-mini{height:4px;background:rgba(189,200,212,.12);border-radius:4px;overflow:hidden}
+.bar-mini i{display:block;height:100%;background:var(--gold)}
+.ev{font-size:12px;border-left:2px solid var(--gold);padding:4px 8px;background:rgba(5,13,25,.5);border-radius:0 8px 8px 0;display:flex;justify-content:space-between;gap:6px;align-items:flex-start}
+.ev.done{opacity:.5;text-decoration:line-through}
+.ev button{background:none;border:0;color:var(--mute);font-size:12px}
+.plan-form{grid-template-columns:1.2fr 1fr .8fr 1fr 1fr auto;align-items:end}
+
+/* 성장 별자리 */
+.growth{grid-template-columns:1fr 1fr}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.stat{padding:16px;border:1px solid var(--line2);border-radius:12px;background:var(--panel)}
+.stat b{display:block;font-family:var(--serif);font-size:30px;color:var(--gold);font-weight:600;line-height:1.2}
+.stat span{font-size:12px;color:var(--mute)}
+svg text{font-family:var(--sans)}
+
+/* 사진첩 */
+.album-tools{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px;align-items:end}
+.album-tools > div{min-width:140px}
+.photos{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+.ph{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line2);background:var(--bg2);aspect-ratio:1/1;cursor:zoom-in}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.ph:hover img{transform:scale(1.04)}
+.ph .cap{position:absolute;left:0;right:0;bottom:0;padding:24px 10px 8px;font-size:12px;background:linear-gradient(transparent,rgba(5,10,20,.9))}
+.ph .cap b{color:var(--gold);font-weight:600}
+.month-h{font-family:var(--serif);font-size:22px;margin:26px 0 12px;font-weight:600}
+
+/* 라이트박스·모달 */
+.modal{position:fixed;inset:0;background:rgba(3,7,14,.86);z-index:50;display:none;align-items:center;justify-content:center;padding:24px}
+.modal.on{display:flex}
+.modal .box{max-width:920px;width:100%;max-height:92vh;overflow:auto;background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:18px}
+.modal img{max-width:100%;max-height:70vh;display:block;margin:0 auto;border-radius:10px}
+.toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(20px);background:var(--gold2);color:#1a1408;font-weight:700;padding:10px 18px;border-radius:999px;opacity:0;transition:.3s;z-index:60;font-size:14px}
+.toast.on{opacity:1;transform:translateX(-50%)}
+
+/* 더보기 */
+.more{grid-template-columns:1fr 1fr}
+.list-row{display:flex;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line2)}
+.list-row:last-child{border-bottom:0}
+.list-row .grow{flex:1}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.reward{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line2)}
+footer{border-top:1px solid var(--line2);padding:28px 0 40px;color:var(--mute);font-size:12px}
+
+@media (max-width:900px){
+  .growth,.more{grid-template-columns:1fr}
+  .week{grid-template-columns:repeat(2,1fr)}
+  .plan-form{grid-template-columns:1fr 1fr}
+  .stat-row{grid-template-columns:repeat(2,1fr)}
+  nav{display:none}
+  .bottom-nav{display:flex!important}
+  body{padding-bottom:68px}
+}
+.bottom-nav{display:none;position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(8,15,27,.95);border-top:1px solid var(--line2);justify-content:space-around;padding:8px 4px}
+.bottom-nav a{font-size:12px;color:var(--sub);text-decoration:none;padding:6px 8px;border-radius:8px;text-align:center}
+.bottom-nav a.on{color:var(--gold)}
+.bottom-nav a b{display:block;font-family:var(--serif);font-size:18px;line-height:1.1}
+@media (max-width:560px){.hanja small{display:none}.date-nav strong{min-width:0;font-size:18px}}
+@media (prefers-reduced-motion:reduce){.fade{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<div id="sky"><canvas id="stars"></canvas></div>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#today"><b>恩</b><div><span>은혜의 홈스쿨</span><small>매일 자라는 다섯 갈래의 별</small></div></a>
+    <nav id="nav">
+      <a href="#today">오늘의 할 일</a><a href="#plan">일정 계획</a><a href="#growth">성장 별자리</a><a href="#album">사진첩</a><a href="#more">설정·보상</a>
+    </nav>
+    <div class="kid-switch" id="kidSwitch"></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="hero fade" id="hero">
+    <span class="eyebrow">은혜의 홈스쿨</span>
+    <h1 class="title">하루를 심으면<br>별 하나가 뜹니다</h1>
+    <p class="lead">큐티로 시작해 질문지로 마치는 아이들의 하루. 해낸 일을 사진으로 남기면 체크가 되고, 그 하루하루가 모여 다섯 갈래의 성장 별자리가 됩니다.</p>
+    <div class="hanja">
+      <div><b>仁</b><span>인성</span><small>마음과 태도</small></div>
+      <div><b>智</b><span>지성</span><small>배움과 생각</small></div>
+      <div><b>體</b><span>체성</span><small>몸과 생활</small></div>
+      <div><b>和</b><span>관계성</span><small>가족과 이웃</small></div>
+      <div><b>靈</b><span>영성</span><small>말씀과 기도</small></div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+
+  <!-- 오늘의 할 일 -->
+  <section class="page" id="page-today">
+    <span class="eyebrow">오늘의 할 일</span>
+    <h2 class="sec">사진 한 장으로 하루를 체크합니다</h2>
+    <p class="sec-lead">할 일을 마치면 결과물(노트, 문제집, 일기)을 사진으로 올려 주세요. 사진이 올라가면 자동으로 체크되고, 부모님이 확인하면 칭찬 별이 쌓입니다.</p>
+
+    <div class="today-head">
+      <div class="date-nav">
+        <button class="btn sm" onclick="shiftDay(-1)" aria-label="이전 날">‹</button>
+        <strong id="dateLabel"></strong>
+        <button class="btn sm" onclick="shiftDay(1)" aria-label="다음 날">›</button>
+        <button class="btn sm" onclick="goToday()">오늘</button>
+      </div>
+      <div class="ring">
+        <svg viewBox="0 0 84 84" aria-hidden="true"><circle cx="42" cy="42" r="36" fill="none" stroke="rgba(189,200,212,.14)" stroke-width="6"/><circle id="ringArc" cx="42" cy="42" r="36" fill="none" stroke="#E6C58B" stroke-width="6" stroke-linecap="round" transform="rotate(-90 42 42)" stroke-dasharray="226.2" stroke-dashoffset="226.2" style="transition:stroke-dashoffset .6s ease"/></svg>
+        <div><div class="n" id="ringNum">0/0</div><div class="muted" style="font-size:13px" id="ringTxt">오늘의 별</div></div>
+      </div>
+    </div>
+
+    <div class="panel verse fade">
+      <div class="q">“</div>
+      <div style="flex:1">
+        <p id="verseText"></p>
+        <div class="ref" id="verseRef"></div>
+      </div>
+      <button class="btn sm" onclick="editVerse()">이번 주 암송 말씀 바꾸기</button>
+    </div>
+
+    <div id="taskGroups"></div>
+  </section>
+
+  <!-- 일정 계획 -->
+  <section class="page" id="page-plan">
+    <span class="eyebrow">일정 계획</span>
+    <h2 class="sec">한 주를 미리 그려 둡니다</h2>
+    <p class="sec-lead">수업, 체험학습, 가족 일정, 시험 준비를 요일별로 계획하세요. 날짜 칸의 금색 막대는 그날 할 일을 얼마나 마쳤는지 보여 줍니다.</p>
+
+    <div class="panel grid plan-form fade" style="margin-bottom:18px">
+      <div><label class="f" for="evTitle">할 일·일정</label><input type="text" id="evTitle" placeholder="예) 박물관 체험학습"></div>
+      <div><label class="f" for="evDate">날짜</label><input type="date" id="evDate"></div>
+      <div><label class="f" for="evTime">시간</label><input type="time" id="evTime"></div>
+      <div><label class="f" for="evArea">영역</label><select id="evArea"></select></div>
+      <div><label class="f" for="evKid">누구</label><select id="evKid"></select></div>
+      <button class="btn gold" onclick="addEvent()">추가</button>
+    </div>
+
+    <div class="date-nav" style="margin-bottom:14px">
+      <button class="btn sm" onclick="shiftWeek(-1)">‹ 지난주</button>
+      <strong id="weekLabel" style="font-size:18px"></strong>
+      <button class="btn sm" onclick="shiftWeek(1)">다음주 ›</button>
+    </div>
+    <div class="grid week" id="week"></div>
+  </section>
+
+  <!-- 성장 별자리 -->
+  <section class="page" id="page-growth">
+    <span class="eyebrow">성장 별자리</span>
+    <h2 class="sec">다섯 갈래로 자라는 아이</h2>
+    <p class="sec-lead">최근 기록을 인성·지성·체성·관계성·영성 다섯 영역으로 나눠 보여 줍니다. 할 일을 모두 마친 날은 밝은 별이 되고, 이어진 날들은 별자리로 연결됩니다.</p>
+    <div class="stat-row" id="stats"></div>
+    <div class="grid growth">
+      <div class="panel fade"><h4 style="margin-bottom:8px">영역별 균형 <span class="muted" style="font-size:12px;font-weight:400">· 최근 7일 체크 수</span></h4><svg id="radar" viewBox="0 0 360 330" style="width:100%"></svg></div>
+      <div class="panel fade"><h4 style="margin-bottom:8px">이번 달 별자리 <span class="muted" style="font-size:12px;font-weight:400">· 밝을수록 많이 해낸 날</span></h4><svg id="constellation" viewBox="0 0 420 330" style="width:100%"></svg></div>
+    </div>
+  </section>
+
+  <!-- 사진첩 -->
+  <section class="page" id="page-album">
+    <span class="eyebrow">사진첩</span>
+    <h2 class="sec">한 장 한 장이 아이의 역사</h2>
+    <p class="sec-lead">할 일 체크로 올린 사진과 자유롭게 올린 사진이 모두 이곳에 모입니다. 사진은 이 기기의 브라우저 안에만 저장되며 인터넷으로 보내지지 않습니다.</p>
+    <div class="album-tools">
+      <div><label class="f" for="fKid">아이</label><select id="fKid"></select></div>
+      <div><label class="f" for="fArea">영역</label><select id="fArea"></select></div>
+      <div><label class="f" for="fMonth">월</label><input type="month" id="fMonth" style="background:rgba(5,13,25,.7);border:1px solid var(--line2);border-radius:10px;padding:9px 12px"></div>
+      <label class="btn gold" style="display:inline-block">자유 사진 올리기<input type="file" accept="image/*" multiple id="freeUpload" hidden></label>
+    </div>
+    <div id="albumBody"></div>
+  </section>
+
+  <!-- 설정·보상 -->
+  <section class="page" id="page-more">
+    <span class="eyebrow">설정·보상</span>
+    <h2 class="sec">우리 집에 맞게 다듬기</h2>
+    <p class="sec-lead">아이를 추가하고, 할 일을 고치고, 칭찬 별로 받을 보상을 정하세요. 기기를 바꿀 때는 백업 파일로 옮길 수 있습니다.</p>
+    <div class="grid more">
+      <div class="panel fade">
+        <h4>아이들</h4>
+        <div id="kidList" style="margin:8px 0 12px"></div>
+        <div style="display:flex;gap:8px"><input type="text" id="newKid" placeholder="이름"><button class="btn" onclick="addKid()">추가</button></div>
+      </div>
+      <div class="panel fade">
+        <h4>칭찬 별과 보상</h4>
+        <p class="muted" style="font-size:13px;margin:4px 0 8px">부모님이 사진을 확인하면 별 1개, 하루를 모두 마치면 보너스 별 2개가 쌓입니다.</p>
+        <div id="pointBox" style="margin-bottom:8px"></div>
+        <div id="rewardList"></div>
+        <div style="display:flex;gap:8px;margin-top:10px"><input type="text" id="rwName" placeholder="보상 (예: 주말 영화)"><input type="number" id="rwCost" placeholder="별" style="width:90px" min="1"><button class="btn" onclick="addReward()">추가</button></div>
+      </div>
+      <div class="panel fade" style="grid-column:1/-1">
+        <h4>매일 할 일 편집</h4>
+        <p class="muted" style="font-size:13px;margin:4px 0 8px">이름·묶음·영역을 바꾸거나 새 할 일을 넣을 수 있습니다. 사용하지 않는 할 일은 끄면 됩니다(기록은 남습니다).</p>
+        <div id="taskEditor"></div>
+        <div class="grid" style="grid-template-columns:1.2fr 1fr 1fr 1.6fr auto;gap:8px;margin-top:10px;align-items:end">
+          <div><label class="f">이름</label><input type="text" id="ntName" placeholder="예) 피아노"></div>
+          <div><label class="f">묶음</label><input type="text" id="ntGroup" placeholder="예) 예체능"></div>
+          <div><label class="f">영역</label><select id="ntArea"></select></div>
+          <div><label class="f">설명</label><input type="text" id="ntHint" placeholder="사진으로 남길 것"></div>
+          <button class="btn gold" onclick="addTask()">할 일 추가</button>
+        </div>
+      </div>
+      <div class="panel fade" style="grid-column:1/-1">
+        <h4>백업과 복원</h4>
+        <p class="muted" style="font-size:13px;margin:4px 0 10px">모든 기록과 사진은 이 브라우저 안에만 있습니다. 브라우저 기록을 지우면 사라지니, 가끔 백업 파일을 내려받아 보관하세요.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn gold" onclick="exportBackup()">백업 파일 내려받기</button>
+          <label class="btn">백업 파일 불러오기<input type="file" accept=".json,application/json" id="importFile" hidden></label>
+          <span class="muted" id="storageInfo" style="font-size:12px;align-self:center"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">© 은혜의 홈스쿨 · 기록은 이 기기에만 저장됩니다 · 오늘도 한 걸음</div></footer>
+
+<nav class="bottom-nav" id="bnav">
+  <a href="#today"><b>今</b>오늘</a><a href="#plan"><b>計</b>계획</a><a href="#growth"><b>星</b>별자리</a><a href="#album"><b>錄</b>사진첩</a><a href="#more"><b>設</b>설정</a>
+</nav>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="box" id="modalBox"></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ========== 데이터 ========== */
+const AREAS = {
+  char:  { hanja:'仁', name:'인성' },
+  intel: { hanja:'智', name:'지성' },
+  body:  { hanja:'體', name:'체성' },
+  rel:   { hanja:'和', name:'관계성' },
+  spirit:{ hanja:'靈', name:'영성' }
+};
+const DEFAULT_TASKS = [
+  { id:'qt',       name:'큐티',     group:'말씀과 마음', area:'spirit', hint:'묵상 노트나 큐티 책 펼친 면' },
+  { id:'reflect',  name:'성찰',     group:'말씀과 마음', area:'char',   hint:'오늘 감사한 일·고칠 점을 쓴 면' },
+  { id:'bible',    name:'통독',     group:'말씀과 마음', area:'spirit', hint:'읽은 장 표시한 통독표' },
+  { id:'english',  name:'영어',     group:'배움',       area:'intel',  hint:'영어 교재·단어장·영어 일기' },
+  { id:'kumon',    name:'구몬수학', group:'배움',       area:'intel',  hint:'오늘 푼 구몬 학습지' },
+  { id:'vocab',    name:'어휘력',   group:'홈스쿨',     area:'intel',  hint:'새로 배운 낱말과 짧은 글' },
+  { id:'aphorism', name:'아포리즘', group:'홈스쿨',     area:'char',   hint:'오늘의 잠언·명언 필사와 생각' },
+  { id:'diary',    name:'다이어리', group:'홈스쿨',     area:'rel',    hint:'하루 일기 (가족·친구 이야기)' },
+  { id:'question', name:'질문지',   group:'홈스쿨',     area:'intel',  hint:'오늘의 질문에 답한 종이' },
+  { id:'exercise', name:'운동',     group:'몸과 섬김',  area:'body',   hint:'줄넘기·산책·체조 하는 모습' },
+  { id:'serve',    name:'가족 섬김', group:'몸과 섬김', area:'rel',    hint:'설거지·정리 등 도운 모습' }
+];
+const KEY = 'eunhye-hs-v1';
+let S = load();
+function load(){
+  try { const s = JSON.parse(localStorage.getItem(KEY)); if (s) return s; } catch(e) {}
+  return {
+    kids:[{ id:'k1', name:'첫째', color:'#E6C58B' }, { id:'k2', name:'둘째', color:'#9CC5D9' }],
+    kid:'k1', tasks: DEFAULT_TASKS.map(t => ({...t, on:true})),
+    checks:{},   // 'YYYY-MM-DD|kid|task' -> { photo:id, at, ok:bool }
+    events:[],   // {id,date,time,title,area,kid,done}
+    points:{}, spent:{}, rewards:[{id:'r1',name:'주말 가족 영화',cost:20},{id:'r2',name:'좋아하는 간식',cost:8}],
+    verse:{ text:'이번 주에 함께 외울 말씀을 적어 주세요. (오른쪽 버튼)', ref:'예) 잠언 3장 5절' }
+  };
+}
+function save(){ localStorage.setItem(KEY, JSON.stringify(S)); }
+const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+
+/* ---- 사진 저장소 (IndexedDB) ---- */
+let DB;
+function openDB(){ return new Promise((res, rej) => {
+  const r = indexedDB.open('eunhye-hs-photos', 1);
+  r.onupgradeneeded = () => r.result.createObjectStore('photos', { keyPath:'id' });
+  r.onsuccess = () => { DB = r.result; res(); }; r.onerror = () => rej(r.error);
+});}
+function tx(mode){ return DB.transaction('photos', mode).objectStore('photos'); }
+const putPhoto = p => new Promise((res, rej) => { const q = tx('readwrite').put(p); q.onsuccess = () => res(); q.onerror = () => rej(q.error); });
+const getPhoto = id => new Promise(res => { const q = tx('readonly').get(id); q.onsuccess = () => res(q.result); q.onerror = () => res(null); });
+const delPhoto = id => new Promise(res => { const q = tx('readwrite').delete(id); q.onsuccess = () => res(); });
+const allPhotos = () => new Promise(res => { const q = tx('readonly').getAll(); q.onsuccess = () => res(q.result || []); });
+const urlCache = new Map();
+async function photoURL(id){
+  if (urlCache.has(id)) return urlCache.get(id);
+  const p = await getPhoto(id); if (!p) return '';
+  const u = URL.createObjectURL(p.blob); urlCache.set(id, u); return u;
+}
+// 사진을 1600px 이하 JPEG로 줄여 저장 공간 절약
+function shrink(file){ return new Promise((res) => {
+  const img = new Image(), u = URL.createObjectURL(file);
+  img.onload = () => {
+    const m = 1600, k = Math.min(1, m / Math.max(img.width, img.height));
+    const c = document.createElement('canvas'); c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+    c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+    c.toBlob(b => { URL.revokeObjectURL(u); res(b || file); }, 'image/jpeg', 0.85);
+  };
+  img.onerror = () => { URL.revokeObjectURL(u); res(file); };
+  img.src = u;
+});}
+
+/* ========== 공통 ========== */
+const $ = id => document.getElementById(id);
+const fmt = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const parse = s => { const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); };
+const DOW = ['일','월','화','수','목','금','토'];
+let curDate = fmt(new Date()), weekStart = mondayOf(new Date());
+function mondayOf(d){ const x = new Date(d); const k = (x.getDay() + 6) % 7; x.setDate(x.getDate() - k); return fmt(x); }
+function toast(t){ const e = $('toast'); e.textContent = t; e.classList.add('on'); clearTimeout(e._t); e._t = setTimeout(() => e.classList.remove('on'), 2200); }
+const kid = () => S.kids.find(k => k.id === S.kid) || S.kids[0];
+const activeTasks = () => S.tasks.filter(t => t.on);
+const ck = (date, kidId, taskId) => `${date}|${kidId}|${taskId}`;
+function dayStats(date, kidId){
+  const ts = activeTasks(); const done = ts.filter(t => S.checks[ck(date, kidId, t.id)]).length;
+  return { done, total: ts.length, ratio: ts.length ? done / ts.length : 0 };
+}
+function areaOptions(sel){ return Object.entries(AREAS).map(([k,a]) => `<option value="${k}" ${k===sel?'selected':''}>${a.hanja} ${a.name}</option>`).join(''); }
+function kidOptions(all, sel){ return (all ? '<option value="all">모두</option>' : '') + S.kids.map(k => `<option value="${k.id}" ${k.id===sel?'selected':''}>${esc(k.name)}</option>`).join(''); }
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function pts(kidId){ return (S.points[kidId] || 0) - (S.spent[kidId] || 0); }
+
+/* ========== 아이 선택 ========== */
+function renderKids(){
+  $('kidSwitch').innerHTML = S.kids.map(k => `<button class="kid-chip ${k.id===S.kid?'on':''}" onclick="pickKid('${k.id}')"><span class="dot" style="background:${k.color};margin-right:6px"></span>${esc(k.name)}</button>`).join('');
+}
+function pickKid(id){ S.kid = id; save(); renderAll(); }
+
+/* ========== 오늘의 할 일 ========== */
+async function renderToday(){
+  const d = parse(curDate), k = kid();
+  $('dateLabel').textContent = `${d.getMonth()+1}월 ${d.getDate()}일 ${DOW[d.getDay()]}요일`;
+  $('verseText').textContent = S.verse.text; $('verseRef').textContent = S.verse.ref;
+  const groups = {};
+  activeTasks().forEach(t => (groups[t.group] = groups[t.group] || []).push(t));
+  let html = '';
+  for (const [g, ts] of Object.entries(groups)) {
+    html += `<div class="group-title">${esc(g)}</div><div class="grid tasks">`;
+    for (const t of ts) {
+      const c = S.checks[ck(curDate, k.id, t.id)], a = AREAS[t.area];
+      html += `<div class="task ${c?'done':''}" id="t-${t.id}">
+        <div class="check">${c?'✓':''}</div>
+        <div class="top"><span class="tag"><b>${a.hanja}</b>${a.name}</span></div>
+        <h4>${esc(t.name)}</h4>
+        ${c ? `<img class="thumb" data-photo="${c.photo}" alt="${esc(t.name)} 인증 사진" onclick="openPhoto('${c.photo}')">
+               <div class="row">${c.ok ? '<span class="parent-ok">★ 부모님 확인 완료</span>' : `<button class="btn sm" onclick="approve('${t.id}')">부모님 확인 ★</button>`}
+               <label class="btn sm">다시 올리기<input type="file" accept="image/*" capture="environment" onchange="upload(event,'${t.id}')"></label>
+               <button class="btn sm" onclick="uncheck('${t.id}')">체크 취소</button></div>`
+             : `<label class="drop"><span style="font-size:20px">＋</span>사진 올리면 체크<span class="hint">${esc(t.hint||'')}</span><input type="file" accept="image/*" capture="environment" onchange="upload(event,'${t.id}')"></label>`}
+      </div>`;
+    }
+    html += '</div>';
+  }
+  $('taskGroups').innerHTML = html || '<div class="empty">설정에서 할 일을 켜 주세요.</div>';
+  document.querySelectorAll('#taskGroups img[data-photo]').forEach(async im => im.src = await photoURL(im.dataset.photo));
+  const st = dayStats(curDate, k.id);
+  $('ringNum').textContent = `${st.done}/${st.total}`;
+  $('ringTxt').textContent = st.done === st.total && st.total ? `${k.name}, 오늘의 별 완성!` : `${k.name}의 오늘의 별`;
+  $('ringArc').setAttribute('stroke-dashoffset', 226.2 * (1 - st.ratio));
+}
+async function upload(ev, taskId){
+  const f = ev.target.files[0]; if (!f) return;
+  const k = kid(), blob = await shrink(f), id = uid();
+  const before = dayStats(curDate, k.id);
+  await putPhoto({ id, blob, date:curDate, kid:k.id, task:taskId, caption:'', at:Date.now() });
+  const prev = S.checks[ck(curDate, k.id, taskId)];
+  S.checks[ck(curDate, k.id, taskId)] = { photo:id, at:Date.now(), ok: prev ? prev.ok : false };
+  const after = dayStats(curDate, k.id);
+  if (after.done === after.total && before.done < before.total) { S.points[k.id] = (S.points[k.id]||0) + 2; toast(`🎉 ${k.name}, 오늘 할 일을 모두 마쳤어요! 보너스 별 +2`); }
+  else toast(`${S.tasks.find(t=>t.id===taskId).name} 체크 완료`);
+  save(); renderToday();
+}
+function approve(taskId){
+  const c = S.checks[ck(curDate, kid().id, taskId)]; if (!c || c.ok) return;
+  c.ok = true; S.points[kid().id] = (S.points[kid().id]||0) + 1; save(); renderToday(); toast('칭찬 별 +1 ★');
+}
+function uncheck(taskId){
+  if (!confirm('이 할 일의 체크를 취소할까요? (사진은 사진첩에 남습니다)')) return;
+  const key = ck(curDate, kid().id, taskId); if (S.checks[key]?.ok) S.points[kid().id] = Math.max(0,(S.points[kid().id]||0) - 1);
+  delete S.checks[key]; save(); renderToday();
+}
+function shiftDay(n){ const d = parse(curDate); d.setDate(d.getDate()+n); curDate = fmt(d); renderToday(); }
+function goToday(){ curDate = fmt(new Date()); renderToday(); }
+function editVerse(){
+  const t = prompt('이번 주 암송 말씀', S.verse.text); if (t === null) return;
+  const r = prompt('말씀 출처 (예: 시편 23편 1절)', S.verse.ref); S.verse = { text:t.trim()||S.verse.text, ref:(r||'').trim() }; save(); renderToday();
+}
+
+/* ========== 일정 계획 ========== */
+function renderPlan(){
+  $('evArea').innerHTML = areaOptions('intel'); $('evKid').innerHTML = kidOptions(false, S.kid);
+  if (!$('evDate').value) $('evDate').value = curDate;
+  const ws = parse(weekStart), we = new Date(ws); we.setDate(we.getDate()+6);
+  $('weekLabel').textContent = `${ws.getMonth()+1}월 ${ws.getDate()}일 – ${we.getMonth()+1}월 ${we.getDate()}일`;
+  const today = fmt(new Date());
+  let html = '';
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(ws); d.setDate(d.getDate()+i); const ds = fmt(d);
+    const st = dayStats(ds, S.kid);
+    const evs = S.events.filter(e => e.date === ds && (e.kid === S.kid || e.kid === 'all')).sort((a,b) => (a.time||'').localeCompare(b.time||''));
+    html += `<div class="day ${ds===today?'today':''}">
+      <h5><span>${DOW[d.getDay()]}</span><b>${d.getDate()}</b></h5>
+      <div class="bar-mini" title="할 일 ${st.done}/${st.total}"><i style="width:${st.ratio*100}%"></i></div>
+      <div class="muted" style="font-size:11px">할 일 ${st.done}/${st.total}</div>
+      ${evs.map(e => `<div class="ev ${e.done?'done':''}"><span><b style="color:var(--gold)">${AREAS[e.area].hanja}</b> ${e.time?e.time+' ':''}${esc(e.title)}</span>
+        <span><button onclick="toggleEvent('${e.id}')" title="완료">✓</button><button onclick="delEvent('${e.id}')" title="삭제">×</button></span></div>`).join('')}
+      <button class="btn sm" style="margin-top:auto" onclick="$('evDate').value='${ds}';$('evTitle').focus()">＋ 계획</button>
+    </div>`;
+  }
+  $('week').innerHTML = html;
+}
+function addEvent(){
+  const title = $('evTitle').value.trim(); if (!title) { $('evTitle').focus(); return; }
+  S.events.push({ id:uid(), title, date:$('evDate').value || curDate, time:$('evTime').value, area:$('evArea').value, kid:$('evKid').value, done:false });
+  $('evTitle').value = ''; save(); weekStart = mondayOf(parse($('evDate').value)); renderPlan(); toast('일정을 추가했어요');
+}
+function toggleEvent(id){ const e = S.events.find(x => x.id === id); e.done = !e.done; save(); renderPlan(); }
+function delEvent(id){ S.events = S.events.filter(x => x.id !== id); save(); renderPlan(); }
+function shiftWeek(n){ const d = parse(weekStart); d.setDate(d.getDate()+7*n); weekStart = fmt(d); renderPlan(); }
+
+/* ========== 성장 별자리 ========== */
+function renderGrowth(){
+  const k = kid(), now = new Date();
+  // 최근 7일 영역별 체크 수
+  const per = { char:0, intel:0, body:0, rel:0, spirit:0 }, cap = { char:0, intel:0, body:0, rel:0, spirit:0 };
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(now); d.setDate(d.getDate()-i); const ds = fmt(d);
+    activeTasks().forEach(t => { cap[t.area]++; if (S.checks[ck(ds, k.id, t.id)]) per[t.area]++; });
+  }
+  // 연속 완성일·총 사진·이번 달 완성일
+  // 오늘을 아직 다 못 했으면 어제부터 셉니다
+  const isFull = ds => { const st = dayStats(ds, k.id); return st.total > 0 && st.done === st.total; };
+  let streak = 0;
+  for (let i = isFull(fmt(now)) ? 0 : 1; i < 400; i++) { const d = new Date(now); d.setDate(d.getDate()-i); if (isFull(fmt(d))) streak++; else break; }
+  const totalChecks = Object.keys(S.checks).filter(x => x.split('|')[1] === k.id).length;
+  const ym = fmt(now).slice(0,7); let full = 0;
+  const days = new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+  for (let i = 1; i <= days; i++) { const st = dayStats(`${ym}-${String(i).padStart(2,'0')}`, k.id); if (st.total && st.done === st.total) full++; }
+  $('stats').innerHTML = [[streak,'연속으로 모두 마친 날'],[full,'이번 달 완성한 날'],[totalChecks,'지금까지 올린 체크'],[pts(k.id),'모은 칭찬 별']]
+    .map(([n,l]) => `<div class="stat"><b>${n}</b><span>${l}</span></div>`).join('');
+
+  // 오각형 레이더
+  const keys = Object.keys(AREAS), cx = 180, cy = 172, R = 120;
+  const pt = (i, r) => { const a = -Math.PI/2 + i * 2*Math.PI/5; return [cx + Math.cos(a)*r, cy + Math.sin(a)*r]; };
+  let g = '';
+  [0.25,0.5,0.75,1].forEach(f => g += `<polygon points="${keys.map((_,i)=>pt(i,R*f).join(',')).join(' ')}" fill="none" stroke="rgba(189,200,212,.14)"/>`);
+  keys.forEach((_,i) => { const [x,y] = pt(i,R); g += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="rgba(189,200,212,.12)"/>`; });
+  const vals = keys.map(k2 => cap[k2] ? per[k2]/cap[k2] : 0);
+  g += `<polygon points="${keys.map((_,i)=>pt(i,R*Math.max(.04,vals[i])).join(',')).join(' ')}" fill="rgba(230,197,139,.18)" stroke="#E6C58B" stroke-width="2"/>`;
+  keys.forEach((k2,i) => {
+    const [x,y] = pt(i,R*Math.max(.04,vals[i])); g += `<circle cx="${x}" cy="${y}" r="4" fill="#E9CD99"/>`;
+    const [lx,ly] = pt(i,R+30);
+    g += `<text x="${lx}" y="${ly-4}" text-anchor="middle" fill="#E6C58B" font-size="22" style="font-family:var(--serif)">${AREAS[k2].hanja}</text><text x="${lx}" y="${ly+14}" text-anchor="middle" fill="#BDC8D4" font-size="12">${AREAS[k2].name} ${per[k2]}/${cap[k2]}</text>`;
+  });
+  $('radar').innerHTML = g;
+
+  // 이번 달 별자리: 날짜마다 별 하나, 완성 비율로 밝기, 모두 마친 날끼리 선으로 연결
+  const cols = 7, W = 420, H = 330, padX = 36, padY = 34, gx = (W-2*padX)/(cols-1);
+  const first = new Date(now.getFullYear(), now.getMonth(), 1), off = (first.getDay()+6)%7, rows = Math.ceil((off+days)/7), gy = (H-2*padY)/Math.max(1,rows-1);
+  let s = '', prev = null, lines = '';
+  for (let i = 1; i <= days; i++) {
+    const idx = off + i - 1, c = idx % cols, r = Math.floor(idx / cols);
+    const jx = Math.sin(i*12.9)*9, jy = Math.cos(i*7.3)*7;
+    const x = padX + c*gx + jx, y = padY + r*gy + jy;
+    const st = dayStats(`${ym}-${String(i).padStart(2,'0')}`, k.id), isFull = st.total && st.done === st.total;
+    const rad = 1.6 + st.ratio*4.2, op = .25 + st.ratio*.75;
+    if (isFull && prev) lines += `<line x1="${prev[0]}" y1="${prev[1]}" x2="${x}" y2="${y}" stroke="rgba(230,197,139,.55)" stroke-width="1"/>`;
+    prev = isFull ? [x,y] : null;
+    s += `${isFull?`<circle cx="${x}" cy="${y}" r="${rad+6}" fill="rgba(230,197,139,.12)"/>`:''}<circle cx="${x}" cy="${y}" r="${rad}" fill="${st.ratio?'#F3E2BF':'#55657a'}" opacity="${op}"><title>${now.getMonth()+1}월 ${i}일 · ${st.done}/${st.total}</title></circle>
+      <text x="${x}" y="${y+rad+12}" text-anchor="middle" fill="#8193A3" font-size="9">${i}</text>`;
+  }
+  $('constellation').innerHTML = lines + s;
+}
+
+/* ========== 사진첩 ========== */
+async function renderAlbum(){
+  if (!$('fKid').options.length) { $('fKid').innerHTML = kidOptions(true, 'all'); $('fArea').innerHTML = '<option value="all">모두</option><option value="free">자유 사진</option>' + areaOptions(''); }
+  const fk = $('fKid').value, fa = $('fArea').value, fm = $('fMonth').value;
+  let ps = (await allPhotos()).sort((a,b) => b.at - a.at);
+  ps = ps.filter(p => (fk==='all' || p.kid===fk) && (!fm || p.date.startsWith(fm)) && (fa==='all' || (fa==='free' ? !p.task : (S.tasks.find(t=>t.id===p.task)||{}).area===fa)));
+  if (!ps.length) { $('albumBody').innerHTML = '<div class="empty">아직 사진이 없어요. 오늘의 할 일에서 사진을 올리거나 자유 사진을 올려 보세요.</div>'; return; }
+  const byMonth = {}; ps.forEach(p => (byMonth[p.date.slice(0,7)] = byMonth[p.date.slice(0,7)] || []).push(p));
+  let html = '';
+  for (const [m, list] of Object.entries(byMonth)) {
+    html += `<div class="month-h">${m.replace('-','년 ')}월 <span class="muted" style="font-family:var(--sans);font-size:13px">${list.length}장</span></div><div class="grid photos">`;
+    html += list.map(p => { const t = S.tasks.find(x => x.id === p.task), kd = S.kids.find(x => x.id === p.kid);
+      return `<div class="ph" onclick="openPhoto('${p.id}')"><img data-photo="${p.id}" alt="${t?esc(t.name):'자유 사진'}" loading="lazy"><div class="cap"><b>${t?esc(t.name):'자유 사진'}</b> · ${kd?esc(kd.name):''}<br><span class="muted">${p.date}${p.caption?' · '+esc(p.caption):''}</span></div></div>`; }).join('');
+    html += '</div>';
+  }
+  $('albumBody').innerHTML = html;
+  document.querySelectorAll('#albumBody img[data-photo]').forEach(async im => im.src = await photoURL(im.dataset.photo));
+}
+async function openPhoto(id){
+  const p = await getPhoto(id); if (!p) return;
+  const t = S.tasks.find(x => x.id === p.task), kd = S.kids.find(x => x.id === p.kid);
+  $('modalBox').innerHTML = `<img src="${await photoURL(id)}" alt="">
+    <div style="display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap">
+      <span class="tag">${t ? `<b>${AREAS[t.area].hanja}</b>${esc(t.name)}` : '자유 사진'}</span><span class="muted">${kd?esc(kd.name):''} · ${p.date}</span>
+      <input type="text" id="capIn" value="${esc(p.caption||'')}" placeholder="한 줄 메모 (예: 처음으로 혼자 다 풀었어요)" style="flex:1;min-width:200px">
+      <button class="btn sm gold" onclick="saveCap('${id}')">메모 저장</button>
+      <button class="btn sm" onclick="removePhoto('${id}')">사진 삭제</button>
+      <button class="btn sm" onclick="closeModal()">닫기</button>
+    </div>`;
+  $('modal').classList.add('on');
+}
+async function saveCap(id){ const p = await getPhoto(id); p.caption = $('capIn').value.trim(); await putPhoto(p); toast('메모를 저장했어요'); closeModal(); route(); }
+async function removePhoto(id){
+  if (!confirm('이 사진을 삭제할까요? 이 사진으로 한 체크도 함께 취소됩니다.')) return;
+  for (const [key, c] of Object.entries(S.checks)) if (c.photo === id) delete S.checks[key];
+  save(); await delPhoto(id); urlCache.delete(id); closeModal(); route(); toast('사진을 삭제했어요');
+}
+function closeModal(){ $('modal').classList.remove('on'); }
+$('freeUpload').addEventListener('change', async e => {
+  for (const f of e.target.files) await putPhoto({ id:uid(), blob: await shrink(f), date: fmt(new Date()), kid: S.kid, task:null, caption:'', at:Date.now() });
+  e.target.value = ''; toast('사진첩에 올렸어요'); renderAlbum();
+});
+['fKid','fArea','fMonth'].forEach(id => $(id).addEventListener('change', renderAlbum));
+
+/* ========== 설정·보상 ========== */
+const COLORS = ['#E6C58B','#9CC5D9','#C9A3D9','#9DD3A8','#E8A1A1','#F0D080'];
+function renderMore(){
+  $('kidList').innerHTML = S.kids.map(k => `<div class="list-row"><span class="dot" style="background:${k.color}"></span><input class="grow" type="text" value="${esc(k.name)}" onchange="renameKid('${k.id}',this.value)" aria-label="이름"><span class="muted" style="font-size:12px">별 ${pts(k.id)}</span>${S.kids.length>1?`<button class="btn sm" onclick="removeKid('${k.id}')">삭제</button>`:''}</div>`).join('');
+  $('pointBox').innerHTML = `<span class="tag"><b>★</b>${esc(kid().name)}의 칭찬 별 ${pts(kid().id)}개</span>`;
+  $('rewardList').innerHTML = S.rewards.map(r => `<div class="reward"><span>${esc(r.name)} <span class="muted">· 별 ${r.cost}</span></span><span style="display:flex;gap:6px"><button class="btn sm ${pts(kid().id)>=r.cost?'gold':''}" onclick="redeem('${r.id}')">교환</button><button class="btn sm" onclick="removeReward('${r.id}')">×</button></span></div>`).join('') || '<div class="muted">보상을 추가해 주세요.</div>';
+  $('ntArea').innerHTML = areaOptions('intel');
+  $('taskEditor').innerHTML = S.tasks.map(t => `<div class="list-row">
+      <input type="checkbox" ${t.on?'checked':''} onchange="setTask('${t.id}','on',this.checked)" aria-label="사용">
+      <input class="grow" type="text" value="${esc(t.name)}" onchange="setTask('${t.id}','name',this.value)" aria-label="이름">
+      <input type="text" value="${esc(t.group)}" onchange="setTask('${t.id}','group',this.value)" style="max-width:130px" aria-label="묶음">
+      <select onchange="setTask('${t.id}','area',this.value)" style="max-width:130px" aria-label="영역">${areaOptions(t.area)}</select>
+    </div>`).join('');
+  storageInfo();
+}
+function addKid(){ const n = $('newKid').value.trim(); if (!n) return; S.kids.push({ id:uid(), name:n, color:COLORS[S.kids.length % COLORS.length] }); $('newKid').value=''; save(); renderAll(); }
+function renameKid(id, v){ const k = S.kids.find(x => x.id === id); k.name = v.trim() || k.name; save(); renderKids(); }
+function removeKid(id){ if (!confirm('이 아이를 목록에서 뺄까요? (기록과 사진은 남습니다)')) return; S.kids = S.kids.filter(k => k.id !== id); if (S.kid === id) S.kid = S.kids[0].id; save(); renderAll(); }
+function setTask(id, key, v){ const t = S.tasks.find(x => x.id === id); t[key] = typeof v === 'string' ? v.trim() : v; save(); }
+function addTask(){ const name = $('ntName').value.trim(); if (!name) return;
+  S.tasks.push({ id:uid(), name, group:$('ntGroup').value.trim() || '추가 할 일', area:$('ntArea').value, hint:$('ntHint').value.trim(), on:true });
+  ['ntName','ntGroup','ntHint'].forEach(i => $(i).value=''); save(); renderMore(); toast('할 일을 추가했어요'); }
+function addReward(){ const n = $('rwName').value.trim(), c = parseInt($('rwCost').value,10); if (!n || !c) return; S.rewards.push({ id:uid(), name:n, cost:c }); $('rwName').value=''; $('rwCost').value=''; save(); renderMore(); }
+function removeReward(id){ S.rewards = S.rewards.filter(r => r.id !== id); save(); renderMore(); }
+function redeem(id){ const r = S.rewards.find(x => x.id === id), k = kid();
+  if (pts(k.id) < r.cost) { toast(`별이 ${r.cost - pts(k.id)}개 더 필요해요`); return; }
+  if (!confirm(`${k.name}: 별 ${r.cost}개로 "${r.name}"을(를) 교환할까요?`)) return;
+  S.spent[k.id] = (S.spent[k.id]||0) + r.cost; save(); renderMore(); toast(`🎁 ${r.name} 교환 완료!`); }
+async function storageInfo(){ if (navigator.storage?.estimate) { const e = await navigator.storage.estimate(); $('storageInfo').textContent = `사용 중 ${(e.usage/1048576).toFixed(1)}MB`; } }
+const b64 = blob => new Promise(res => { const r = new FileReader(); r.onload = () => res(r.result); r.readAsDataURL(blob); });
+async function exportBackup(){
+  toast('백업 파일을 만드는 중…');
+  const photos = await Promise.all((await allPhotos()).map(async p => ({ ...p, blob: await b64(p.blob) })));
+  const data = JSON.stringify({ app:'eunhye-homeschool', v:1, state:S, photos });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([data], { type:'application/json' }));
+  a.download = `은혜의홈스쿨-백업-${fmt(new Date())}.json`; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+$('importFile').addEventListener('change', async e => {
+  const f = e.target.files[0]; if (!f) return;
+  try {
+    const d = JSON.parse(await f.text()); if (d.app !== 'eunhye-homeschool') throw new Error('형식이 달라요');
+    if (!confirm('백업 파일로 지금 기록을 바꿀까요? 지금 기록은 덮어써집니다.')) return;
+    for (const p of d.photos) await putPhoto({ ...p, blob: await (await fetch(p.blob)).blob() });
+    S = d.state; save(); urlCache.clear(); renderAll(); toast('복원했어요');
+  } catch(err) { alert('백업 파일을 읽지 못했어요: ' + err.message); }
+  e.target.value = '';
+});
+
+/* ========== 화면 전환·모션 ========== */
+const PAGES = ['today','plan','growth','album','more'];
+function route(){
+  const p = PAGES.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'today';
+  PAGES.forEach(x => $('page-'+x).classList.toggle('on', x === p));
+  $('hero').style.display = p === 'today' ? '' : 'none';   // 큰 히어로는 첫 화면에서만
+  if (p !== 'today') window.scrollTo(0, 0);
+  document.querySelectorAll('#nav a, #bnav a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#'+p));
+  ({ today:renderToday, plan:renderPlan, growth:renderGrowth, album:renderAlbum, more:renderMore })[p]();
+  observeFade();
+}
+function renderAll(){ renderKids(); route(); }
+const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold:.12 }) : null;
+function observeFade(){ document.querySelectorAll('.fade:not(.in)').forEach(el => io ? io.observe(el) : el.classList.add('in')); }
+window.addEventListener('hashchange', route);
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// 반짝이는 밤하늘 (느리고 절제된 움직임)
+(function sky(){
+  const c = $('stars'), x = c.getContext('2d'); let st = [];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){ const d = devicePixelRatio || 1; c.width = innerWidth*d; c.height = innerHeight*d; x.setTransform(d,0,0,d,0,0);
+    st = Array.from({ length: Math.round(innerWidth*innerHeight/5200) }, () => ({ x:Math.random()*innerWidth, y:Math.random()*innerHeight, r:Math.random()*1.2+.2, p:Math.random()*6.28, s:.004+Math.random()*.01, g:Math.random()<.06 })); }
+  function draw(t){ x.clearRect(0,0,innerWidth,innerHeight);
+    for (const s of st) { const a = .35 + .45*Math.sin(s.p + t*s.s*0.06); x.fillStyle = s.g ? `rgba(233,205,153,${a})` : `rgba(220,228,240,${a*.8})`; x.beginPath(); x.arc(s.x, s.y, s.r, 0, 6.29); x.fill(); }
+    // 금색 궤도선
+    x.strokeStyle = 'rgba(230,197,139,.10)'; x.lineWidth = 1; x.beginPath(); x.ellipse(innerWidth*.78, innerHeight*.32, innerWidth*.26, innerWidth*.16, -.35, 0, 6.29); x.stroke();
+    if (!reduce) requestAnimationFrame(draw); }
+  addEventListener('resize', size); size(); requestAnimationFrame(draw);
+})();
+
+openDB().then(renderAll).catch(() => { alert('이 브라우저에서는 사진 저장소를 열 수 없어요. 사파리 개인정보 보호 모드라면 일반 모드로 열어 주세요.'); renderAll(); });
+</script>
+</body>
+</html>
