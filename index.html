@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>은혜의 홈스쿨 | 매일 자라는 다섯 갈래의 별</title>
-<meta name="description" content="인성·지성·체성·관계성·영성으로 아이들의 하루를 기록하고 계획하는 은혜의 홈스쿨">
+<title>은혜의 홈스쿨 | 매일 자라는 일곱 갈래의 별</title>
+<meta name="description" content="인성·지성·체성·관계성·영성·예술성·자연으로 아이들의 하루를 기록하고 계획하는 은혜의 홈스쿨">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&display=swap" rel="stylesheet">
@@ -51,7 +51,7 @@ nav a.on{color:var(--bg);background:var(--gold2);font-weight:700}
 .eyebrow::before{content:"";width:40px;height:1px;background:var(--gold)}
 h1.title{font-family:var(--serif);font-weight:600;font-size:clamp(44px,7.2vw,84px);line-height:1.12;letter-spacing:-.075em;margin:22px 0 22px}
 .lead{max-width:560px;color:var(--sub);font-size:16px}
-.hanja{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:56px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.hanja{display:grid;grid-template-columns:repeat(7,1fr);gap:0;margin-top:56px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .hanja div{padding:22px 10px 18px;text-align:center;border-right:1px solid var(--line2)}
 .hanja div:last-child{border-right:0}
 .hanja b{display:block;font-family:var(--serif);font-size:clamp(34px,5vw,52px);color:var(--gold);font-weight:600;line-height:1.1}
@@ -156,6 +156,15 @@ svg text{font-family:var(--sans)}
 .list-row .grow{flex:1}
 .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
 .reward{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line2)}
+.days{display:inline-flex;gap:2px}.dayb{width:24px;height:24px;border-radius:6px;border:1px solid var(--line2);background:transparent;font-size:11px;color:var(--mute);padding:0}.dayb.on{background:rgba(230,197,139,.16);border-color:var(--gold);color:var(--gold)}
+.jcard{display:grid;grid-template-columns:220px 1fr;gap:18px;margin-bottom:14px}
+.jcard .pics{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-content:start}
+.jcard .pics img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;cursor:zoom-in;border:1px solid var(--line2)}
+.jcard .pics img:first-child{grid-column:1/-1;aspect-ratio:4/3}
+.jcols{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
+.jcols div{font-size:14px;color:var(--sub);white-space:pre-wrap}
+.jcols b{display:block;color:var(--gold);font-size:12px;margin-bottom:2px}
+@media (max-width:900px){.jcard,.jcols{grid-template-columns:1fr}#page-journal .grid{grid-template-columns:1fr!important}}
 footer{border-top:1px solid var(--line2);padding:28px 0 40px;color:var(--mute);font-size:12px}
 
 @media (max-width:900px){
@@ -171,7 +180,7 @@ footer{border-top:1px solid var(--line2);padding:28px 0 40px;color:var(--mute);f
 .bottom-nav a{font-size:12px;color:var(--sub);text-decoration:none;padding:6px 8px;border-radius:8px;text-align:center}
 .bottom-nav a.on{color:var(--gold)}
 .bottom-nav a b{display:block;font-family:var(--serif);font-size:18px;line-height:1.1}
-@media (max-width:560px){.hanja small{display:none}.date-nav strong{min-width:0;font-size:18px}}
+@media (max-width:560px){.hanja small{display:none}.hanja b{font-size:26px}.hanja span{font-size:11px}.date-nav strong{min-width:0;font-size:18px}}
 @media (prefers-reduced-motion:reduce){.fade{opacity:1;transform:none;transition:none}}
 </style>
 </head>
@@ -180,9 +189,9 @@ footer{border-top:1px solid var(--line2);padding:28px 0 40px;color:var(--mute);f
 
 <header>
   <div class="wrap bar">
-    <a class="logo" href="#today"><b>恩</b><div><span>은혜의 홈스쿨</span><small>매일 자라는 다섯 갈래의 별</small></div></a>
+    <a class="logo" href="#today"><b>恩</b><div><span>은혜의 홈스쿨</span><small>매일 자라는 일곱 갈래의 별</small></div></a>
     <nav id="nav">
-      <a href="#today">오늘의 할 일</a><a href="#plan">일정 계획</a><a href="#growth">성장 별자리</a><a href="#album">사진첩</a><a href="#more">설정·보상</a>
+      <a href="#today">오늘의 할 일</a><a href="#plan">일정 계획</a><a href="#journal">관찰일기</a><a href="#growth">성장 별자리</a><a href="#album">사진첩</a><a href="#more">설정·보상</a>
     </nav>
     <div class="kid-switch" id="kidSwitch"></div>
   </div>
@@ -192,13 +201,15 @@ footer{border-top:1px solid var(--line2);padding:28px 0 40px;color:var(--mute);f
   <div class="hero fade" id="hero">
     <span class="eyebrow">은혜의 홈스쿨</span>
     <h1 class="title">하루를 심으면<br>별 하나가 뜹니다</h1>
-    <p class="lead">큐티로 시작해 질문지로 마치는 아이들의 하루. 해낸 일을 사진으로 남기면 체크가 되고, 그 하루하루가 모여 다섯 갈래의 성장 별자리가 됩니다.</p>
+    <p class="lead">큐티로 시작해 질문지로 마치는 아이들의 하루. 해낸 일을 사진으로 남기면 체크가 되고, 그 하루하루가 모여 일곱 갈래의 성장 별자리가 됩니다.</p>
     <div class="hanja">
       <div><b>仁</b><span>인성</span><small>마음과 태도</small></div>
       <div><b>智</b><span>지성</span><small>배움과 생각</small></div>
       <div><b>體</b><span>체성</span><small>몸과 생활</small></div>
       <div><b>和</b><span>관계성</span><small>가족과 이웃</small></div>
       <div><b>靈</b><span>영성</span><small>말씀과 기도</small></div>
+      <div><b>藝</b><span>예술성</span><small>악기와 그림</small></div>
+      <div><b>然</b><span>자연</span><small>농사와 탐방</small></div>
     </div>
   </div>
 </div>
@@ -259,14 +270,42 @@ footer{border-top:1px solid var(--line2);padding:28px 0 40px;color:var(--mute);f
     <div class="grid week" id="week"></div>
   </section>
 
+  <!-- 관찰일기 -->
+  <section class="page" id="page-journal">
+    <span class="eyebrow">자연 관찰일기</span>
+    <h2 class="sec">본 것, 궁금한 것, 알게 된 것</h2>
+    <p class="sec-lead">텃밭의 새싹, 길에서 만난 곤충, 오늘의 하늘. 보고 느낀 것을 세 칸에 나눠 적고 사진을 붙이면 그날의 관찰일기 할 일이 자동으로 체크됩니다.</p>
+    <div class="panel fade" style="margin-bottom:22px">
+      <div class="grid" style="grid-template-columns:1fr 1fr 1fr 1.4fr;gap:12px">
+        <div><label class="f" for="jDate">날짜</label><input type="date" id="jDate"></div>
+        <div><label class="f" for="jKid">누가</label><select id="jKid"></select></div>
+        <div><label class="f" for="jKind">무엇을</label><select id="jKind"><option>식물·텃밭</option><option>곤충·동물</option><option>날씨·하늘</option><option>물·흙·돌</option><option>계절의 변화</option><option>기타</option></select></div>
+        <div><label class="f" for="jPlace">어디서</label><input type="text" id="jPlace" placeholder="예) 우리 집 텃밭, 동네 뒷산"></div>
+      </div>
+      <div style="margin-top:12px"><label class="f" for="jTitle">제목</label><input type="text" id="jTitle" placeholder="예) 상추 잎이 하루 만에 커졌다"></div>
+      <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px">
+        <div><label class="f" for="jSaw">👀 본 것 (모양·색·크기·소리·냄새)</label><textarea id="jSaw" rows="5" placeholder="자세히 보고 그대로 적어요"></textarea></div>
+        <div><label class="f" for="jWonder">❓ 궁금한 것</label><textarea id="jWonder" rows="5" placeholder="왜 그럴까? 더 알고 싶은 것"></textarea></div>
+        <div><label class="f" for="jLearn">💡 알게 된 것</label><textarea id="jLearn" rows="5" placeholder="찾아보거나 생각해서 알게 된 것"></textarea></div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap">
+        <label class="btn">사진 붙이기 (여러 장)<input type="file" accept="image/*" multiple id="jPhotos" hidden></label>
+        <span class="muted" id="jPhotoInfo" style="font-size:13px">사진 없음</span>
+        <span style="flex:1"></span>
+        <button class="btn gold" onclick="saveJournal()">관찰일기 저장</button>
+      </div>
+    </div>
+    <div id="journalList"></div>
+  </section>
+
   <!-- 성장 별자리 -->
   <section class="page" id="page-growth">
     <span class="eyebrow">성장 별자리</span>
-    <h2 class="sec">다섯 갈래로 자라는 아이</h2>
-    <p class="sec-lead">최근 기록을 인성·지성·체성·관계성·영성 다섯 영역으로 나눠 보여 줍니다. 할 일을 모두 마친 날은 밝은 별이 되고, 이어진 날들은 별자리로 연결됩니다.</p>
+    <h2 class="sec">일곱 갈래로 자라는 아이</h2>
+    <p class="sec-lead">최근 기록을 인성·지성·체성·관계성·영성·예술성·자연 일곱 영역으로 나눠 보여 줍니다. 할 일을 모두 마친 날은 밝은 별이 되고, 이어진 날들은 별자리로 연결됩니다.</p>
     <div class="stat-row" id="stats"></div>
     <div class="grid growth">
-      <div class="panel fade"><h4 style="margin-bottom:8px">영역별 균형 <span class="muted" style="font-size:12px;font-weight:400">· 최근 7일 체크 수</span></h4><svg id="radar" viewBox="0 0 360 330" style="width:100%"></svg></div>
+      <div class="panel fade"><h4 style="margin-bottom:8px">영역별 균형 <span class="muted" style="font-size:12px;font-weight:400">· 최근 7일 체크 수</span></h4><svg id="radar" viewBox="0 0 360 340" style="width:100%"></svg></div>
       <div class="panel fade"><h4 style="margin-bottom:8px">이번 달 별자리 <span class="muted" style="font-size:12px;font-weight:400">· 밝을수록 많이 해낸 날</span></h4><svg id="constellation" viewBox="0 0 420 330" style="width:100%"></svg></div>
     </div>
   </section>
@@ -305,7 +344,7 @@ footer{border-top:1px solid var(--line2);padding:28px 0 40px;color:var(--mute);f
       </div>
       <div class="panel fade" style="grid-column:1/-1">
         <h4>매일 할 일 편집</h4>
-        <p class="muted" style="font-size:13px;margin:4px 0 8px">이름·묶음·영역을 바꾸거나 새 할 일을 넣을 수 있습니다. 사용하지 않는 할 일은 끄면 됩니다(기록은 남습니다).</p>
+        <p class="muted" style="font-size:13px;margin:4px 0 8px">이름·묶음·영역을 바꾸고, 누가 하는지(예: 드럼은 혜강만)와 하는 요일(예: 피아노 레슨은 화·목)을 정할 수 있습니다. 쓰지 않는 할 일은 끄면 됩니다(기록은 남습니다).</p>
         <div id="taskEditor"></div>
         <div class="grid" style="grid-template-columns:1.2fr 1fr 1fr 1.6fr auto;gap:8px;margin-top:10px;align-items:end">
           <div><label class="f">이름</label><input type="text" id="ntName" placeholder="예) 피아노"></div>
@@ -331,7 +370,7 @@ footer{border-top:1px solid var(--line2);padding:28px 0 40px;color:var(--mute);f
 <footer><div class="wrap">© 은혜의 홈스쿨 · 기록은 이 기기에만 저장됩니다 · 오늘도 한 걸음</div></footer>
 
 <nav class="bottom-nav" id="bnav">
-  <a href="#today"><b>今</b>오늘</a><a href="#plan"><b>計</b>계획</a><a href="#growth"><b>星</b>별자리</a><a href="#album"><b>錄</b>사진첩</a><a href="#more"><b>設</b>설정</a>
+  <a href="#today"><b>今</b>오늘</a><a href="#plan"><b>計</b>계획</a><a href="#journal"><b>觀</b>관찰</a><a href="#growth"><b>星</b>별자리</a><a href="#album"><b>錄</b>사진첩</a><a href="#more"><b>設</b>설정</a>
 </nav>
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()"><div class="box" id="modalBox"></div></div>
@@ -344,7 +383,9 @@ const AREAS = {
   intel: { hanja:'智', name:'지성' },
   body:  { hanja:'體', name:'체성' },
   rel:   { hanja:'和', name:'관계성' },
-  spirit:{ hanja:'靈', name:'영성' }
+  spirit:{ hanja:'靈', name:'영성' },
+  art:   { hanja:'藝', name:'예술성' },
+  nature:{ hanja:'然', name:'자연' }
 };
 const DEFAULT_TASKS = [
   { id:'qt',       name:'큐티',     group:'말씀과 마음', area:'spirit', hint:'묵상 노트나 큐티 책 펼친 면' },
@@ -357,20 +398,38 @@ const DEFAULT_TASKS = [
   { id:'diary',    name:'다이어리', group:'홈스쿨',     area:'rel',    hint:'하루 일기 (가족·친구 이야기)' },
   { id:'question', name:'질문지',   group:'홈스쿨',     area:'intel',  hint:'오늘의 질문에 답한 종이' },
   { id:'exercise', name:'운동',     group:'몸과 섬김',  area:'body',   hint:'줄넘기·산책·체조 하는 모습' },
-  { id:'serve',    name:'가족 섬김', group:'몸과 섬김', area:'rel',    hint:'설거지·정리 등 도운 모습' }
+  { id:'serve',    name:'가족 섬김', group:'몸과 섬김', area:'rel',    hint:'설거지·정리 등 도운 모습' },
+  { id:'violin',   name:'바이올린', group:'예술',      area:'art',    hint:'연습하는 모습이나 연습 기록표' },
+  { id:'piano',    name:'피아노',   group:'예술',      area:'art',    hint:'연습하는 모습이나 악보' },
+  { id:'drum',     name:'드럼',     group:'예술',      area:'art',    hint:'연습하는 모습' },
+  { id:'drawing',  name:'그림 그리기', group:'예술',   area:'art',    hint:'오늘 그린 그림' },
+  { id:'craft',    name:'만들기·공예', group:'예술',   area:'art',    hint:'만든 작품', on:false },
+  { id:'farm',     name:'텃밭 농사', group:'자연',     area:'nature', hint:'물 주기·잡초 뽑기·수확한 모습' },
+  { id:'explore',  name:'자연탐방', group:'자연',      area:'nature', hint:'숲·공원·냇가에서 만난 것', on:false },
+  { id:'observe',  name:'관찰일기', group:'자연',      area:'nature', hint:'관찰일기 메뉴에서 쓰면 자동으로 체크', journal:true }
 ];
+const ALL_DAYS = [0,1,2,3,4,5,6];
 const KEY = 'eunhye-hs-v1';
 let S = load();
 function load(){
-  try { const s = JSON.parse(localStorage.getItem(KEY)); if (s) return s; } catch(e) {}
+  try { const s = JSON.parse(localStorage.getItem(KEY)); if (s) return migrate(s); } catch(e) {}
   return {
-    kids:[{ id:'k1', name:'첫째', color:'#E6C58B' }, { id:'k2', name:'둘째', color:'#9CC5D9' }],
-    kid:'k1', tasks: DEFAULT_TASKS.map(t => ({...t, on:true})),
+    kids:[{ id:'k1', name:'혜준', color:'#E6C58B' }, { id:'k2', name:'혜강', color:'#9CC5D9' }],
+    kid:'k1', tasks: DEFAULT_TASKS.map(t => ({ on:true, kids:'all', days:ALL_DAYS, ...t })), journal:[],
     checks:{},   // 'YYYY-MM-DD|kid|task' -> { photo:id, at, ok:bool }
     events:[],   // {id,date,time,title,area,kid,done}
     points:{}, spent:{}, rewards:[{id:'r1',name:'주말 가족 영화',cost:20},{id:'r2',name:'좋아하는 간식',cost:8}],
     verse:{ text:'이번 주에 함께 외울 말씀을 적어 주세요. (오른쪽 버튼)', ref:'예) 잠언 3장 5절' }
   };
+}
+// 예전 버전으로 쓰던 기록을 새 버전에 맞게 이어받기
+function migrate(s){
+  const names = { '첫째':'혜준', '둘째':'혜강' };
+  s.kids.forEach(k => { if (names[k.name]) k.name = names[k.name]; });
+  DEFAULT_TASKS.forEach(t => { if (!s.tasks.find(x => x.id === t.id)) s.tasks.push({ on:true, kids:'all', days:ALL_DAYS, ...t }); });
+  s.tasks.forEach(t => { if (!t.kids) t.kids = 'all'; if (!t.days) t.days = ALL_DAYS; if (t.id === 'observe') t.journal = true; });
+  s.journal = s.journal || [];
+  return s;
 }
 function save(){ localStorage.setItem(KEY, JSON.stringify(S)); }
 const uid = () => Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
@@ -415,10 +474,13 @@ let curDate = fmt(new Date()), weekStart = mondayOf(new Date());
 function mondayOf(d){ const x = new Date(d); const k = (x.getDay() + 6) % 7; x.setDate(x.getDate() - k); return fmt(x); }
 function toast(t){ const e = $('toast'); e.textContent = t; e.classList.add('on'); clearTimeout(e._t); e._t = setTimeout(() => e.classList.remove('on'), 2200); }
 const kid = () => S.kids.find(k => k.id === S.kid) || S.kids[0];
-const activeTasks = () => S.tasks.filter(t => t.on);
+// 그날 그 아이에게 해당하는 할 일 (요일·아이 지정 반영)
+const activeTasks = (date, kidId) => S.tasks.filter(t => t.on
+  && (!date || (t.days || ALL_DAYS).includes(parse(date).getDay()))
+  && (!kidId || t.kids === 'all' || (Array.isArray(t.kids) && t.kids.includes(kidId))));
 const ck = (date, kidId, taskId) => `${date}|${kidId}|${taskId}`;
 function dayStats(date, kidId){
-  const ts = activeTasks(); const done = ts.filter(t => S.checks[ck(date, kidId, t.id)]).length;
+  const ts = activeTasks(date, kidId); const done = ts.filter(t => S.checks[ck(date, kidId, t.id)]).length;
   return { done, total: ts.length, ratio: ts.length ? done / ts.length : 0 };
 }
 function areaOptions(sel){ return Object.entries(AREAS).map(([k,a]) => `<option value="${k}" ${k===sel?'selected':''}>${a.hanja} ${a.name}</option>`).join(''); }
@@ -438,7 +500,7 @@ async function renderToday(){
   $('dateLabel').textContent = `${d.getMonth()+1}월 ${d.getDate()}일 ${DOW[d.getDay()]}요일`;
   $('verseText').textContent = S.verse.text; $('verseRef').textContent = S.verse.ref;
   const groups = {};
-  activeTasks().forEach(t => (groups[t.group] = groups[t.group] || []).push(t));
+  activeTasks(curDate, k.id).forEach(t => (groups[t.group] = groups[t.group] || []).push(t));
   let html = '';
   for (const [g, ts] of Object.entries(groups)) {
     html += `<div class="group-title">${esc(g)}</div><div class="grid tasks">`;
@@ -448,16 +510,19 @@ async function renderToday(){
         <div class="check">${c?'✓':''}</div>
         <div class="top"><span class="tag"><b>${a.hanja}</b>${a.name}</span></div>
         <h4>${esc(t.name)}</h4>
-        ${c ? `<img class="thumb" data-photo="${c.photo}" alt="${esc(t.name)} 인증 사진" onclick="openPhoto('${c.photo}')">
+        ${c && !c.photo ? `<a class="drop" href="#journal" style="text-decoration:none">✓ 관찰일기를 썼어요<span class="hint">눌러서 보기</span></a>` : ''}
+        ${!c && t.journal ? `<a class="btn sm gold" href="#journal" style="text-align:center;text-decoration:none">관찰일기 쓰러 가기</a>` : ''}
+        ${c && c.photo ? `<img class="thumb" data-photo="${c.photo}" alt="${esc(t.name)} 인증 사진" onclick="openPhoto('${c.photo}')">
                <div class="row">${c.ok ? '<span class="parent-ok">★ 부모님 확인 완료</span>' : `<button class="btn sm" onclick="approve('${t.id}')">부모님 확인 ★</button>`}
                <label class="btn sm">다시 올리기<input type="file" accept="image/*" capture="environment" onchange="upload(event,'${t.id}')"></label>
                <button class="btn sm" onclick="uncheck('${t.id}')">체크 취소</button></div>`
+             : c ? `<div class="row">${c.ok ? '<span class="parent-ok">★ 부모님 확인 완료</span>' : `<button class="btn sm" onclick="approve('${t.id}')">부모님 확인 ★</button>`}</div>`
              : `<label class="drop"><span style="font-size:20px">＋</span>사진 올리면 체크<span class="hint">${esc(t.hint||'')}</span><input type="file" accept="image/*" capture="environment" onchange="upload(event,'${t.id}')"></label>`}
       </div>`;
     }
     html += '</div>';
   }
-  $('taskGroups').innerHTML = html || '<div class="empty">설정에서 할 일을 켜 주세요.</div>';
+  $('taskGroups').innerHTML = html || '<div class="empty">오늘은 정해진 할 일이 없어요. 설정에서 할 일과 요일을 정해 주세요.</div>';
   document.querySelectorAll('#taskGroups img[data-photo]').forEach(async im => im.src = await photoURL(im.dataset.photo));
   const st = dayStats(curDate, k.id);
   $('ringNum').textContent = `${st.done}/${st.total}`;
@@ -524,14 +589,53 @@ function toggleEvent(id){ const e = S.events.find(x => x.id === id); e.done = !e
 function delEvent(id){ S.events = S.events.filter(x => x.id !== id); save(); renderPlan(); }
 function shiftWeek(n){ const d = parse(weekStart); d.setDate(d.getDate()+7*n); weekStart = fmt(d); renderPlan(); }
 
+/* ========== 관찰일기 ========== */
+let jFiles = [];
+$('jPhotos').addEventListener('change', e => { jFiles = [...e.target.files]; $('jPhotoInfo').textContent = jFiles.length ? `사진 ${jFiles.length}장 선택됨` : '사진 없음'; });
+function renderJournalForm(){
+  $('jKid').innerHTML = kidOptions(false, S.kid);
+  if (!$('jDate').value) $('jDate').value = fmt(new Date());
+}
+async function saveJournal(){
+  const title = $('jTitle').value.trim(), saw = $('jSaw').value.trim();
+  if (!title && !saw) { toast('제목이나 본 것을 적어 주세요'); $('jTitle').focus(); return; }
+  const date = $('jDate').value || fmt(new Date()), kidId = $('jKid').value, photos = [];
+  for (const f of jFiles) { const id = uid(); await putPhoto({ id, blob: await shrink(f), date, kid:kidId, task:'observe', caption:title, at:Date.now() }); photos.push(id); }
+  S.journal.unshift({ id:uid(), date, kid:kidId, kind:$('jKind').value, place:$('jPlace').value.trim(), title, saw, wonder:$('jWonder').value.trim(), learn:$('jLearn').value.trim(), photos, at:Date.now() });
+  // 그날의 관찰일기 할 일 자동 체크
+  const key = ck(date, kidId, 'observe');
+  if (!S.checks[key] || !S.checks[key].photo) S.checks[key] = { photo: photos[0] || (S.checks[key] && S.checks[key].photo) || null, at:Date.now(), ok: S.checks[key] ? S.checks[key].ok : false };
+  save();
+  ['jTitle','jPlace','jSaw','jWonder','jLearn'].forEach(i => $(i).value = ''); $('jPhotos').value = ''; jFiles = []; $('jPhotoInfo').textContent = '사진 없음';
+  toast('관찰일기를 저장했어요 · 오늘의 관찰일기 체크 ✓'); renderJournal();
+}
+async function renderJournal(){
+  renderJournalForm();
+  const list = S.journal.filter(j => j.kid === S.kid || S.kids.length === 1);
+  if (!list.length) { $('journalList').innerHTML = `<div class="empty">${esc(kid().name)}의 첫 관찰일기를 써 보세요.</div>`; return; }
+  $('journalList').innerHTML = list.map(j => `<div class="panel jcard">
+      <div class="pics">${j.photos.length ? j.photos.map(id => `<img data-photo="${id}" alt="관찰 사진" onclick="openPhoto('${id}')">`).join('') : '<div class="empty" style="grid-column:1/-1;padding:24px 8px">사진 없음</div>'}</div>
+      <div>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="tag"><b>然</b>${esc(j.kind)}</span><span class="muted" style="font-size:13px">${j.date}${j.place ? ' · ' + esc(j.place) : ''}</span>
+          <span style="flex:1"></span><button class="btn sm" onclick="delJournal('${j.id}')">삭제</button></div>
+        <h3 style="font-family:var(--serif);font-weight:600;font-size:22px;letter-spacing:-.03em;margin:8px 0 2px">${esc(j.title || '제목 없는 관찰')}</h3>
+        <div class="jcols"><div><b>본 것</b>${esc(j.saw || '—')}</div><div><b>궁금한 것</b>${esc(j.wonder || '—')}</div><div><b>알게 된 것</b>${esc(j.learn || '—')}</div></div>
+      </div></div>`).join('');
+  document.querySelectorAll('#journalList img[data-photo]').forEach(async im => im.src = await photoURL(im.dataset.photo));
+}
+function delJournal(id){
+  if (!confirm('이 관찰일기를 지울까요? (사진은 사진첩에 남습니다)')) return;
+  S.journal = S.journal.filter(j => j.id !== id); save(); renderJournal();
+}
+
 /* ========== 성장 별자리 ========== */
 function renderGrowth(){
   const k = kid(), now = new Date();
   // 최근 7일 영역별 체크 수
-  const per = { char:0, intel:0, body:0, rel:0, spirit:0 }, cap = { char:0, intel:0, body:0, rel:0, spirit:0 };
+  const per = {}, cap = {}; Object.keys(AREAS).forEach(a => { per[a] = 0; cap[a] = 0; });
   for (let i = 0; i < 7; i++) {
     const d = new Date(now); d.setDate(d.getDate()-i); const ds = fmt(d);
-    activeTasks().forEach(t => { cap[t.area]++; if (S.checks[ck(ds, k.id, t.id)]) per[t.area]++; });
+    activeTasks(ds, k.id).forEach(t => { cap[t.area]++; if (S.checks[ck(ds, k.id, t.id)]) per[t.area]++; });
   }
   // 연속 완성일·총 사진·이번 달 완성일
   // 오늘을 아직 다 못 했으면 어제부터 셉니다
@@ -547,7 +651,7 @@ function renderGrowth(){
 
   // 오각형 레이더
   const keys = Object.keys(AREAS), cx = 180, cy = 172, R = 120;
-  const pt = (i, r) => { const a = -Math.PI/2 + i * 2*Math.PI/5; return [cx + Math.cos(a)*r, cy + Math.sin(a)*r]; };
+  const N = keys.length, pt = (i, r) => { const a = -Math.PI/2 + i * 2*Math.PI/N; return [cx + Math.cos(a)*r, cy + Math.sin(a)*r]; };
   let g = '';
   [0.25,0.5,0.75,1].forEach(f => g += `<polygon points="${keys.map((_,i)=>pt(i,R*f).join(',')).join(' ')}" fill="none" stroke="rgba(189,200,212,.14)"/>`);
   keys.forEach((_,i) => { const [x,y] = pt(i,R); g += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="rgba(189,200,212,.12)"/>`; });
@@ -633,7 +737,12 @@ function renderMore(){
       <input type="checkbox" ${t.on?'checked':''} onchange="setTask('${t.id}','on',this.checked)" aria-label="사용">
       <input class="grow" type="text" value="${esc(t.name)}" onchange="setTask('${t.id}','name',this.value)" aria-label="이름">
       <input type="text" value="${esc(t.group)}" onchange="setTask('${t.id}','group',this.value)" style="max-width:130px" aria-label="묶음">
-      <select onchange="setTask('${t.id}','area',this.value)" style="max-width:130px" aria-label="영역">${areaOptions(t.area)}</select>
+      <select onchange="setTask('${t.id}','area',this.value)" style="max-width:120px" aria-label="영역">${areaOptions(t.area)}</select>
+      <select onchange="setTaskKids('${t.id}',this.value)" style="max-width:100px" aria-label="누구">
+        <option value="all" ${t.kids==='all'?'selected':''}>모두</option>
+        ${S.kids.map(k => `<option value="${k.id}" ${Array.isArray(t.kids)&&t.kids.length===1&&t.kids[0]===k.id?'selected':''}>${esc(k.name)}만</option>`).join('')}
+      </select>
+      <span class="days">${DOW.map((d,i) => `<button type="button" class="dayb ${(t.days||ALL_DAYS).includes(i)?'on':''}" onclick="toggleDay('${t.id}',${i})" aria-label="${d}요일">${d}</button>`).join('')}</span>
     </div>`).join('');
   storageInfo();
 }
@@ -641,8 +750,10 @@ function addKid(){ const n = $('newKid').value.trim(); if (!n) return; S.kids.pu
 function renameKid(id, v){ const k = S.kids.find(x => x.id === id); k.name = v.trim() || k.name; save(); renderKids(); }
 function removeKid(id){ if (!confirm('이 아이를 목록에서 뺄까요? (기록과 사진은 남습니다)')) return; S.kids = S.kids.filter(k => k.id !== id); if (S.kid === id) S.kid = S.kids[0].id; save(); renderAll(); }
 function setTask(id, key, v){ const t = S.tasks.find(x => x.id === id); t[key] = typeof v === 'string' ? v.trim() : v; save(); }
+function setTaskKids(id, v){ const t = S.tasks.find(x => x.id === id); t.kids = v === 'all' ? 'all' : [v]; save(); }
+function toggleDay(id, d){ const t = S.tasks.find(x => x.id === id); const ds = new Set(t.days || ALL_DAYS); ds.has(d) ? ds.delete(d) : ds.add(d); t.days = [...ds].sort(); save(); renderMore(); }
 function addTask(){ const name = $('ntName').value.trim(); if (!name) return;
-  S.tasks.push({ id:uid(), name, group:$('ntGroup').value.trim() || '추가 할 일', area:$('ntArea').value, hint:$('ntHint').value.trim(), on:true });
+  S.tasks.push({ id:uid(), name, group:$('ntGroup').value.trim() || '추가 할 일', area:$('ntArea').value, hint:$('ntHint').value.trim(), on:true, kids:'all', days:ALL_DAYS });
   ['ntName','ntGroup','ntHint'].forEach(i => $(i).value=''); save(); renderMore(); toast('할 일을 추가했어요'); }
 function addReward(){ const n = $('rwName').value.trim(), c = parseInt($('rwCost').value,10); if (!n || !c) return; S.rewards.push({ id:uid(), name:n, cost:c }); $('rwName').value=''; $('rwCost').value=''; save(); renderMore(); }
 function removeReward(id){ S.rewards = S.rewards.filter(r => r.id !== id); save(); renderMore(); }
@@ -671,14 +782,14 @@ $('importFile').addEventListener('change', async e => {
 });
 
 /* ========== 화면 전환·모션 ========== */
-const PAGES = ['today','plan','growth','album','more'];
+const PAGES = ['today','plan','journal','growth','album','more'];
 function route(){
   const p = PAGES.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'today';
   PAGES.forEach(x => $('page-'+x).classList.toggle('on', x === p));
   $('hero').style.display = p === 'today' ? '' : 'none';   // 큰 히어로는 첫 화면에서만
   if (p !== 'today') window.scrollTo(0, 0);
   document.querySelectorAll('#nav a, #bnav a').forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#'+p));
-  ({ today:renderToday, plan:renderPlan, growth:renderGrowth, album:renderAlbum, more:renderMore })[p]();
+  ({ today:renderToday, plan:renderPlan, journal:renderJournal, growth:renderGrowth, album:renderAlbum, more:renderMore })[p]();
   observeFade();
 }
 function renderAll(){ renderKids(); route(); }
