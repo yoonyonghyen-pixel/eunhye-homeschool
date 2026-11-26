@@ -164,6 +164,7 @@ svg text{font-family:var(--sans)}
 .pips{display:inline-flex;gap:4px;margin-left:6px}.pips i{width:10px;height:10px;border-radius:50%;border:1px solid var(--gold);display:inline-block}.pips i.on{background:var(--gold)}
 .notice{border-left:2px solid var(--gold);padding:10px 14px;margin-bottom:10px;background:var(--panel);border-radius:0 12px 12px 0}
 @media (max-width:900px){#homeIntro,#homeSteps,#homeFeatures{grid-template-columns:1fr!important}#homeSteps>div{border-right:0!important;border-bottom:1px solid var(--line2)}#goalWrap,#page-admin .grid{grid-template-columns:1fr!important}}
+.nbadge{display:inline-flex;align-items:center;justify-content:center;min-width:18px;height:18px;padding:0 5px;margin-left:5px;border-radius:9px;background:#e8a1a1;color:#1a0d0d;font-size:11px;font-weight:800;line-height:1;vertical-align:1px}
 .days{display:inline-flex;gap:2px}.dayb{width:24px;height:24px;border-radius:6px;border:1px solid var(--line2);background:transparent;font-size:11px;color:var(--mute);padding:0}.dayb.on{background:rgba(230,197,139,.16);border-color:var(--gold);color:var(--gold)}
 .jcard{display:grid;grid-template-columns:220px 1fr;gap:18px;margin-bottom:14px}
 .jcard .pics{display:grid;grid-template-columns:1fr 1fr;gap:6px;align-content:start}
@@ -199,7 +200,7 @@ footer{border-top:1px solid var(--line2);padding:28px 0 40px;color:var(--mute);f
   <div class="wrap bar">
     <a class="logo" href="#home"><b>恩</b><div><span>은혜의 홈스쿨</span><small>매일 자라는 일곱 갈래의 별</small></div></a>
     <nav id="nav">
-      <a href="#home">홈</a><a href="#today">오늘 한 일</a><a href="#plan">일정 계획</a><a href="#growth">성장 별자리</a><a href="#album">사진첩</a><a href="#more">설정·보상</a><a href="#admin" id="navAdmin" style="display:none">관리자</a>
+      <a href="#home">홈</a><a href="#today">오늘 한 일</a><a href="#plan">일정 계획</a><a href="#growth">성장 별자리</a><a href="#album">사진첩</a><a href="#more">설정·보상</a><a href="#admin" id="navAdmin" style="display:none">관리자<span class="nbadge" id="pendBadge" hidden></span></a>
     </nav>
     <div style="display:flex;gap:10px;align-items:center">
       <div class="kid-switch" id="kidSwitch"></div>
@@ -596,11 +597,20 @@ function renderAuthArea(){
   if (!me) {
     $('authArea').innerHTML = `<button class="btn sm" onclick="openAuth('login')">로그인</button><button class="btn sm gold" onclick="openAuth('signup')">회원가입</button>`;
   } else {
-    const badge = me.role === 'admin' ? '<span class="tag" style="padding:0 8px">관리자</span>' : '';
+    const badge = isAdmin() ? `<a href="#admin" class="tag" style="padding:0 8px;text-decoration:none">관리자<span class="nbadge" id="pendBadge2" hidden></span></a>` : '';
     $('authArea').innerHTML = `${badge}<span class="muted" style="font-size:13px">${esc(me.name || me.email)}</span><button class="btn sm" onclick="logout()">로그아웃</button>`;
   }
   $('navAdmin').style.display = isAdmin() ? '' : 'none';
+  refreshPending();
 }
+// 승인 대기 회원 수를 '관리자' 옆에 숫자로 표시
+async function refreshPending(){
+  let n = 0;
+  if (isAdmin()) { const { count } = await sb.from('profiles').select('id', { count:'exact', head:true }).eq('status', 'pending'); n = count || 0; }
+  ['pendBadge','pendBadge2'].forEach(id => { const b = $(id); if (b) { b.textContent = n; b.hidden = !n; b.title = `승인 대기 ${n}명`; } });
+}
+setInterval(() => { if (isAdmin() && !document.hidden) refreshPending(); }, 60000);
+document.addEventListener('visibilitychange', () => { if (!document.hidden && isAdmin()) refreshPending(); });
 function openAuth(mode){
   const signup = mode === 'signup';
   $('modalBox').innerHTML = `<div style="max-width:420px;margin:0 auto;padding:10px 4px">
@@ -1023,7 +1033,7 @@ async function setMember(id, role, status){
   if (!confirm(`이 회원을 ${label}할까요?`)) return;
   const { error } = await sb.rpc('admin_set_member', { p_id: id, p_role: role, p_status: status });
   if (error) { toast('바꾸지 못했어요: ' + error.message); return; }
-  toast(`${label} 완료`); renderAdmin();
+  toast(`${label} 완료`); renderAdmin(); refreshPending();
 }
 async function viewFamily(id){
   const m = members.find(x => x.id === id); viewName = (m && (m.family || m.name)) || '회원';
